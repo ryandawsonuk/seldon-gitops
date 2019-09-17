@@ -36,6 +36,8 @@
                 "svcOrchSpec": {},
                 "traffic": 100,
                 "explainer": {
+                    "type": "ANCHOR_TABULAR",
+                    "modelUri": "gs://seldon-models/sklearn/income/explainer",
                     "containerSpec": {
                         "name": "",
                         "resources": {}
