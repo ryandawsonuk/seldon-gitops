@@ -62,7 +62,8 @@
                     "modelUri": "gs://seldon-models/sklearn/income/explainer",
                     "containerSpec": {
                         "name": "",
-                        "resources": {}
+                        "resources": {},
+                        "imagePullPolicy": "Always"
                     }
                 }
             }
