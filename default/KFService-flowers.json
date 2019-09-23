@@ -1,0 +1,21 @@
+{
+    "kind": "KFService",
+    "apiVersion": "serving.kubeflow.org/v1alpha1",
+    "metadata": {
+        "name": "flowers",
+        "namespace": "default",
+        "creationTimestamp": null
+    },
+    "spec": {
+        "default": {
+            "tensorflow": {
+                "modelUri": "gs://kfserving-samples/models/tensorflow/flowers",
+                "resources": {}
+            }
+        }
+    },
+    "status": {
+        "default": {},
+        "canary": {}
+    }
+}
