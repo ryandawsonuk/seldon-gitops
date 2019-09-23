@@ -1,0 +1,51 @@
+{
+    "kind": "SeldonDeployment",
+    "apiVersion": "machinelearning.seldon.io/v1alpha2",
+    "metadata": {
+        "name": "sklearnsd",
+        "namespace": "default",
+        "creationTimestamp": null
+    },
+    "spec": {
+        "name": "sklearnsd",
+        "predictors": [
+            {
+                "name": "default",
+                "graph": {
+                    "name": "sklearnsd-default",
+                    "implementation": "SKLEARN_SERVER",
+                    "modelUri": "gs://seldon-models/sklearn/iris"
+                },
+                "componentSpecs": [
+                    {
+                        "metadata": {
+                            "creationTimestamp": "2019-09-23T10:46:28Z"
+                        },
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "sklearnsd-default",
+                                    "resources": {}
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "engineResources": {},
+                "svcOrchSpec": {},
+                "traffic": 100,
+                "explainer": {
+                    "containerSpec": {
+                        "name": "",
+                        "resources": {}
+                    }
+                }
+            }
+        ],
+        "annotations": {
+            "seldon.io/engine-seldon-log-messages-externally": "true"
+        }
+    },
+    "status": {}
+}
