@@ -13,13 +13,7 @@
                 "name": "default",
                 "graph": {
                     "name": "sklearnirissd-default",
-                    "type": "UNKNOWN_TYPE",
                     "implementation": "SKLEARN_SERVER",
-                    "endpoint": {
-                        "service_host": "localhost",
-                        "service_port": 9000,
-                        "type": "REST"
-                    },
                     "modelUri": "gs://seldon-models/sklearn/iris"
                 },
                 "componentSpecs": [
@@ -28,69 +22,9 @@
                             "creationTimestamp": "2019-09-24T14:06:08Z"
                         },
                         "spec": {
-                            "volumes": [
-                                {
-                                    "name": "podinfo",
-                                    "downwardAPI": {
-                                        "items": [
-                                            {
-                                                "path": "annotations",
-                                                "fieldRef": {
-                                                    "apiVersion": "v1",
-                                                    "fieldPath": "metadata.annotations"
-                                                }
-                                            }
-                                        ],
-                                        "defaultMode": 420
-                                    }
-                                }
-                            ],
                             "containers": [
                                 {
                                     "name": "sklearnirissd-default",
-                                    "image": "seldonio/sklearnserver_rest:0.2",
-                                    "resources": {},
-                                    "volumeMounts": [
-                                        {
-                                            "name": "podinfo",
-                                            "mountPath": "/etc/podinfo"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    }
-                ],
-                "replicas": 1,
-                "engineResources": {},
-                "labels": {
-                    "version": "default"
-                },
-                "svcOrchSpec": {},
-                "traffic": 90,
-                "explainer": {
-                    "containerSpec": {
-                        "name": "",
-                        "resources": {}
-                    }
-                }
-            },
-            {
-                "name": "canary",
-                "graph": {
-                    "name": "sklearnirissd-canary",
-                    "implementation": "SKLEARN_SERVER",
-                    "modelUri": "gs://seldon-models/sklearn/iris"
-                },
-                "componentSpecs": [
-                    {
-                        "metadata": {
-                            "creationTimestamp": "2019-09-24T15:11:32Z"
-                        },
-                        "spec": {
-                            "containers": [
-                                {
-                                    "name": "sklearnirissd-canary",
                                     "resources": {}
                                 }
                             ]
@@ -100,7 +34,7 @@
                 "replicas": 1,
                 "engineResources": {},
                 "svcOrchSpec": {},
-                "traffic": 10,
+                "traffic": 100,
                 "explainer": {
                     "containerSpec": {
                         "name": "",
