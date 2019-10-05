@@ -13,7 +13,13 @@
                 "name": "default",
                 "graph": {
                     "name": "skiris-default",
+                    "type": "UNKNOWN_TYPE",
                     "implementation": "SKLEARN_SERVER",
+                    "endpoint": {
+                        "service_host": "localhost",
+                        "service_port": 9000,
+                        "type": "REST"
+                    },
                     "modelUri": "gs://seldon-models/sklearn/iris"
                 },
                 "componentSpecs": [
@@ -22,9 +28,69 @@
                             "creationTimestamp": "2019-10-05T11:30:07Z"
                         },
                         "spec": {
+                            "volumes": [
+                                {
+                                    "name": "podinfo",
+                                    "downwardAPI": {
+                                        "items": [
+                                            {
+                                                "path": "annotations",
+                                                "fieldRef": {
+                                                    "apiVersion": "v1",
+                                                    "fieldPath": "metadata.annotations"
+                                                }
+                                            }
+                                        ],
+                                        "defaultMode": 420
+                                    }
+                                }
+                            ],
                             "containers": [
                                 {
                                     "name": "skiris-default",
+                                    "image": "seldonio/sklearnserver_rest:0.2",
+                                    "resources": {},
+                                    "volumeMounts": [
+                                        {
+                                            "name": "podinfo",
+                                            "mountPath": "/etc/podinfo"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "engineResources": {},
+                "labels": {
+                    "version": "default"
+                },
+                "svcOrchSpec": {},
+                "traffic": 90,
+                "explainer": {
+                    "containerSpec": {
+                        "name": "",
+                        "resources": {}
+                    }
+                }
+            },
+            {
+                "name": "canary",
+                "graph": {
+                    "name": "skiris-canary",
+                    "implementation": "XGBOOST_SERVER",
+                    "modelUri": "gs://seldon-models/xgboost/iris"
+                },
+                "componentSpecs": [
+                    {
+                        "metadata": {
+                            "creationTimestamp": "2019-10-05T17:00:12Z"
+                        },
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "skiris-canary",
                                     "resources": {}
                                 }
                             ]
@@ -34,7 +100,7 @@
                 "replicas": 1,
                 "engineResources": {},
                 "svcOrchSpec": {},
-                "traffic": 100,
+                "traffic": 10,
                 "explainer": {
                     "containerSpec": {
                         "name": "",
