@@ -40,6 +40,10 @@
                                         {
                                             "name": "podinfo",
                                             "mountPath": "/etc/podinfo"
+                                        },
+                                        {
+                                            "name": "podinfo",
+                                            "mountPath": "/etc/podinfo"
                                         }
                                     ]
                                 }
@@ -55,7 +59,6 @@
                 "svcOrchSpec": {},
                 "traffic": 100,
                 "explainer": {
-                    "type": "anchor_text",
                     "containerSpec": {
                         "name": "",
                         "resources": {}
