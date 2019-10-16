@@ -11,7 +11,7 @@
 				"graph": {
 					"children": [],
 					"implementation": "SKLEARN_SERVER",
-					"modelUri": "gs://dev-ryan-kubeflow3-bucket/sklearn/iris",
+					"modelUri": "gs://seldon-models/sklearn/iris",
 					"serviceAccountName": "user-gcp-sa",
 					"name": "classifier"
 				},
