@@ -4,7 +4,10 @@
     "metadata": {
         "name": "income-classifier-joel2",
         "namespace": "default",
-        "creationTimestamp": null
+        "creationTimestamp": null,
+        "labels": {
+            "app.kubernetes.io/instance": "seldon-gitops-default"
+        }
     },
     "spec": {
         "name": "income-classifier-joel2",
@@ -13,8 +16,11 @@
                 "name": "default",
                 "graph": {
                     "name": "income-classifier-joel2-default",
+                    "type": "UNKNOWN_TYPE",
                     "implementation": "SKLEARN_SERVER",
                     "endpoint": {
+                        "service_host": "localhost",
+                        "service_port": 9000,
                         "type": "REST"
                     },
                     "modelUri": "gs://seldon-models/sklearn/income/model"
@@ -28,6 +34,7 @@
                             "containers": [
                                 {
                                     "name": "income-classifier-joel2-default",
+                                    "image": "seldonio/sklearnserver_rest:0.2",
                                     "resources": {
                                         "limits": {
                                             "cpu": "1",
@@ -37,7 +44,13 @@
                                             "cpu": "1",
                                             "memory": "2Gi"
                                         }
-                                    }
+                                    },
+                                    "volumeMounts": [
+                                        {
+                                            "name": "podinfo",
+                                            "mountPath": "/etc/podinfo"
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -45,12 +58,23 @@
                 ],
                 "replicas": 1,
                 "engineResources": {},
+                "labels": {
+                    "version": "default"
+                },
                 "svcOrchSpec": {},
                 "traffic": 100,
                 "explainer": {
+                    "type": "anchor_tabular",
+                    "modelUri": "gs://seldon-models/sklearn/income/explainer",
                     "containerSpec": {
                         "name": "",
                         "resources": {}
+                    },
+                    "config": {
+                        "batch_size": "100",
+                        "delta": "0.1",
+                        "tau": "0.15",
+                        "threshold": "0.95"
                     }
                 }
             }
