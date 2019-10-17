@@ -1,0 +1,63 @@
+{
+    "kind": "SeldonDeployment",
+    "apiVersion": "machinelearning.seldon.io/v1alpha2",
+    "metadata": {
+        "name": "incomeclassifer",
+        "namespace": "default",
+        "creationTimestamp": null
+    },
+    "spec": {
+        "name": "incomeclassifer",
+        "predictors": [
+            {
+                "name": "default",
+                "graph": {
+                    "name": "incomeclassifer-default",
+                    "implementation": "SKLEARN_SERVER",
+                    "endpoint": {
+                        "type": "REST"
+                    },
+                    "modelUri": "gs://seldon-models/sklearn/income/model"
+                },
+                "componentSpecs": [
+                    {
+                        "metadata": {
+                            "creationTimestamp": "2019-10-17T09:54:52Z"
+                        },
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "incomeclassifer-default",
+                                    "resources": {
+                                        "limits": {
+                                            "cpu": "1",
+                                            "memory": "2Gi"
+                                        },
+                                        "requests": {
+                                            "cpu": "1",
+                                            "memory": "2Gi"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "engineResources": {},
+                "svcOrchSpec": {},
+                "traffic": 100,
+                "explainer": {
+                    "containerSpec": {
+                        "name": "",
+                        "resources": {}
+                    }
+                }
+            }
+        ],
+        "annotations": {
+            "seldon.io/engine-seldon-log-messages-externally": "true"
+        }
+    },
+    "status": {}
+}
