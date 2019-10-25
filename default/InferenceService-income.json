@@ -4,13 +4,33 @@
     "metadata": {
         "name": "income",
         "namespace": "default",
-        "creationTimestamp": null
+        "creationTimestamp": null,
+        "labels": {
+            "app.kubernetes.io/instance": "seldon-gitops-default"
+        }
     },
     "spec": {
         "default": {
             "predictor": {
                 "sklearn": {
                     "storageUri": "gs://seldon-models/sklearn/income/model",
+                    "runtimeVersion": "0.2.0",
+                    "resources": {
+                        "limits": {
+                            "cpu": "1",
+                            "memory": "2Gi"
+                        },
+                        "requests": {
+                            "cpu": "1",
+                            "memory": "2Gi"
+                        }
+                    }
+                }
+            },
+            "explainer": {
+                "alibi": {
+                    "type": "AnchorTabular",
+                    "storageUri": "gs://seldon-models/sklearn/income/explainer",
                     "resources": {}
                 }
             }
