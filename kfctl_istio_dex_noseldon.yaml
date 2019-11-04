@@ -108,7 +108,7 @@ spec:
       - name: oidc_redirect_uris
         value: '["/login/oidc"]'
       - name: static_email
-        value: admin@kubeflow.org
+        value: admin@seldon.io
       # Password is "12341234", 12-round bcrypt-hashed.
       - name: static_password_hash
         value: $2y$12$ruoM7FqXrpVgaol44eRZW.4HWS8SAvg6KYVVSCIwKQPBmTpCm.EeO
