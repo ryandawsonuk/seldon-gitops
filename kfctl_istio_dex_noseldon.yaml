@@ -230,7 +230,7 @@ spec:
         path: tf-training/tf-job-operator
     name: tf-job-operator
   - kustomizeConfig:
-  	  overlays:
+      overlays:
       - application
       repoRef:
         name: manifests
