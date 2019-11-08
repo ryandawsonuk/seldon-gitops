@@ -4,10 +4,7 @@
     "metadata": {
         "name": "loanclassifier",
         "namespace": "default",
-        "creationTimestamp": null,
-        "labels": {
-            "app.kubernetes.io/instance": "seldon-gitops-default"
-        }
+        "creationTimestamp": null
     },
     "spec": {
         "name": "loanclassifier",
@@ -53,10 +50,46 @@
                     "version": "default"
                 },
                 "svcOrchSpec": {},
-                "traffic": 100,
+                "traffic": 90,
                 "explainer": {
                     "type": "anchor_tabular",
                     "modelUri": "gs://seldon-models/sklearn/income/explainer",
+                    "containerSpec": {
+                        "name": "",
+                        "resources": {}
+                    }
+                }
+            },
+            {
+                "name": "canary",
+                "graph": {
+                    "name": "loanclassifier-canary",
+                    "implementation": "SKLEARN_SERVER",
+                    "endpoint": {
+                        "type": "REST"
+                    },
+                    "modelUri": "gs://seldon-models/sklearn/income/model"
+                },
+                "componentSpecs": [
+                    {
+                        "metadata": {
+                            "creationTimestamp": "2019-11-08T15:19:58Z"
+                        },
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "loanclassifier-canary",
+                                    "resources": {}
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "engineResources": {},
+                "svcOrchSpec": {},
+                "traffic": 10,
+                "explainer": {
                     "containerSpec": {
                         "name": "",
                         "resources": {}
