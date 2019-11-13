@@ -1,103 +1,152 @@
 {
-    "kind": "SeldonDeployment",
-    "apiVersion": "machinelearning.seldon.io/v1alpha2",
-    "metadata": {
-        "name": "income-classifier",
-        "namespace": "default",
-        "creationTimestamp": null
-    },
-    "spec": {
-        "name": "income-classifier",
-        "predictors": [
-            {
-                "name": "default",
-                "graph": {
-                    "name": "income-classifier-default",
-                    "type": "UNKNOWN_TYPE",
-                    "implementation": "SKLEARN_SERVER",
-                    "endpoint": {
-                        "service_host": "localhost",
-                        "service_port": 9000,
-                        "type": "REST"
-                    },
-                    "modelUri": "gs://seldon-models/sklearn/income/model"
-                },
-                "componentSpecs": [
-                    {
-                        "metadata": {
-                            "creationTimestamp": "2019-11-13T10:15:27Z"
-                        },
-                        "spec": {
-                            "containers": [
-                                {
-                                    "name": "income-classifier-default",
-                                    "image": "seldonio/sklearnserver_rest:0.2",
-                                    "resources": {},
-                                    "volumeMounts": [
-                                        {
-                                            "name": "podinfo",
-                                            "mountPath": "/etc/podinfo"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    }
-                ],
-                "replicas": 1,
-                "engineResources": {},
-                "labels": {
-                    "version": "default"
-                },
-                "svcOrchSpec": {},
-                "traffic": 90,
-                "explainer": {
-                    "containerSpec": {
-                        "name": "",
-                        "resources": {}
-                    }
-                }
+  "kind": "SeldonDeployment",
+  "apiVersion": "machinelearning.seldon.io/v1alpha2",
+  "metadata": {
+    "name": "income-classifier",
+    "namespace": "default",
+    "creationTimestamp": null
+  },
+  "spec": {
+    "name": "income-classifier",
+    "predictors": [
+      {
+        "name": "default",
+        "graph": {
+          "name": "income-classifier-default",
+          "type": "UNKNOWN_TYPE",
+          "implementation": "SKLEARN_SERVER",
+          "endpoint": {
+            "service_host": "localhost",
+            "service_port": 9000,
+            "type": "REST"
+          },
+          "modelUri": "gs://seldon-models/sklearn/income/model"
+        },
+        "componentSpecs": [
+          {
+            "metadata": {
+              "creationTimestamp": "2019-11-13T10:15:27Z"
             },
-            {
-                "name": "canary",
-                "graph": {
-                    "name": "income-classifier-canary",
-                    "implementation": "SKLEARN_SERVER",
-                    "endpoint": {
-                        "type": "REST"
-                    },
-                    "modelUri": "gs://seldon-models/sklearn/income/model"
-                },
-                "componentSpecs": [
+            "spec": {
+              "containers": [
+                {
+                  "name": "income-classifier-default",
+                  "image": "seldonio/sklearnserver_rest:0.2",
+                  "resources": {},
+                  "volumeMounts": [
                     {
-                        "metadata": {
-                            "creationTimestamp": "2019-11-13T10:16:24Z"
-                        },
-                        "spec": {
-                            "containers": [
-                                {
-                                    "name": "income-classifier-canary",
-                                    "resources": {}
-                                }
-                            ]
-                        }
+                      "name": "podinfo",
+                      "mountPath": "/etc/podinfo"
                     }
-                ],
-                "replicas": 1,
-                "engineResources": {},
-                "svcOrchSpec": {},
-                "traffic": 10,
-                "explainer": {
-                    "containerSpec": {
-                        "name": "",
-                        "resources": {}
-                    }
+                  ]
                 }
+              ]
             }
+          }
         ],
-        "annotations": {
-            "seldon.io/engine-seldon-log-messages-externally": "true"
+        "replicas": 1,
+        "engineResources": {},
+        "labels": {
+          "version": "default"
+        },
+        "svcOrchSpec": {},
+        "traffic": 90,
+        "explainer": {
+          "containerSpec": {
+            "name": "",
+            "resources": {}
+          }
         }
-    },
-    "status": {}
+      },
+      {
+        "name": "canary",
+        "graph": {
+          "name": "income-classifier-canary",
+          "implementation": "SKLEARN_SERVER",
+          "endpoint": {
+            "type": "REST"
+          },
+          "modelUri": "gs://seldon-models/sklearn/income/model"
+        },
+        "componentSpecs": [
+          {
+            "metadata": {
+              "creationTimestamp": "2019-11-13T10:16:24Z"
+            },
+            "spec": {
+              "containers": [
+                {
+                  "name": "income-classifier-canary",
+                  "resources": {}
+                }
+              ]
+            }
+          }
+        ],
+        "replicas": 1,
+        "engineResources": {},
+        "svcOrchSpec": {},
+        "traffic": 10,
+        "explainer": {
+          "containerSpec": {
+            "name": "",
+            "resources": {}
+          }
+        }
+      },
+      {
+        "name": "shadow",
+        "graph": {
+          "name": "income-classifier-shadow",
+          "type": "UNKNOWN_TYPE",
+          "implementation": "SKLEARN_SERVER",
+          "endpoint": {
+            "service_host": "localhost",
+            "service_port": 9001,
+            "type": "REST"
+          },
+          "modelUri": "gs://seldon-models/sklearn/income/model"
+        },
+        "componentSpecs": [
+          {
+            "metadata": {
+              "creationTimestamp": "2019-11-08T15:19:58Z"
+            },
+            "spec": {
+              "containers": [
+                {
+                  "name": "income-classifier-shadow",
+                  "image": "seldonio/sklearnserver_rest:0.2",
+                  "resources": {},
+                  "volumeMounts": [
+                    {
+                      "name": "podinfo",
+                      "mountPath": "/etc/podinfo"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "replicas": 1,
+        "engineResources": {},
+        "labels": {
+          "version": "shadow"
+        },
+        "svcOrchSpec": {},
+        "shadow": "true",
+        "explainer": {
+          "containerSpec": {
+            "name": "",
+            "resources": {}
+          }
+        }
+      }
+    ],
+    "annotations": {
+      "seldon.io/engine-seldon-log-messages-externally": "true"
+    }
+  },
+  "status": {}
 }
