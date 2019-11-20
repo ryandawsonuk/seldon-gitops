@@ -1,0 +1,20 @@
+{
+    "kind": "InferenceService",
+    "apiVersion": "serving.kubeflow.org/v1alpha2",
+    "metadata": {
+        "name": "tfservingkf",
+        "namespace": "kubeflow",
+        "creationTimestamp": null
+    },
+    "spec": {
+        "default": {
+            "predictor": {
+                "tensorflow": {
+                    "storageUri": "pvc://seldon-mnist-tf-9jkg7-modelpvc/",
+                    "resources": {}
+                }
+            }
+        }
+    },
+    "status": {}
+}
