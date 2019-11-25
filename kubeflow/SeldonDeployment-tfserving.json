@@ -12,7 +12,7 @@
 				"graph": {
 					"children": [],
 					"implementation": "TENSORFLOW_SERVER",
-					"modelUri": "pvc://seldon-mnist-tf-9jkg7-modelpvc/",
+					"modelUri": "pvc://seldon-mnist-tfjob-m68v5-modelpvc/export",
 					"name": "mnist-model",
 					"parameters": [
 						{
