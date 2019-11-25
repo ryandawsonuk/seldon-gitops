@@ -1,0 +1,54 @@
+{
+    "kind": "SeldonDeployment",
+    "apiVersion": "machinelearning.seldon.io/v1alpha2",
+    "metadata": {
+        "name": "loanclassifier",
+        "namespace": "default",
+        "creationTimestamp": null
+    },
+    "spec": {
+        "name": "loanclassifier",
+        "predictors": [
+            {
+                "name": "default",
+                "graph": {
+                    "name": "loanclassifier-default",
+                    "implementation": "SKLEARN_SERVER",
+                    "endpoint": {
+                        "type": "REST"
+                    },
+                    "modelUri": "gs://seldon-models/sklearn/income/model"
+                },
+                "componentSpecs": [
+                    {
+                        "metadata": {
+                            "creationTimestamp": "2019-11-25T10:44:35Z"
+                        },
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "loanclassifier-default",
+                                    "resources": {}
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "engineResources": {},
+                "svcOrchSpec": {},
+                "traffic": 100,
+                "explainer": {
+                    "containerSpec": {
+                        "name": "",
+                        "resources": {}
+                    }
+                }
+            }
+        ],
+        "annotations": {
+            "seldon.io/engine-seldon-log-messages-externally": "true"
+        }
+    },
+    "status": {}
+}
