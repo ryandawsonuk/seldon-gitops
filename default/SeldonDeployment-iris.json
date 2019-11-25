@@ -13,8 +13,11 @@
                 "name": "default",
                 "graph": {
                     "name": "iris-default",
+                    "type": "UNKNOWN_TYPE",
                     "implementation": "SKLEARN_SERVER",
                     "endpoint": {
+                        "service_host": "localhost",
+                        "service_port": 9000,
                         "type": "REST"
                     },
                     "modelUri": "gs://seldon-models/sklearn/iris"
@@ -28,6 +31,7 @@
                             "containers": [
                                 {
                                     "name": "iris-default",
+                                    "image": "seldonio/sklearnserver_rest:0.2",
                                     "resources": {
                                         "limits": {
                                             "cpu": "1",
@@ -37,7 +41,52 @@
                                             "cpu": "1",
                                             "memory": "1Gi"
                                         }
-                                    }
+                                    },
+                                    "volumeMounts": [
+                                        {
+                                            "name": "podinfo",
+                                            "mountPath": "/etc/podinfo"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "engineResources": {},
+                "labels": {
+                    "version": "default"
+                },
+                "svcOrchSpec": {},
+                "traffic": 90,
+                "explainer": {
+                    "containerSpec": {
+                        "name": "",
+                        "resources": {}
+                    }
+                }
+            },
+            {
+                "name": "canary",
+                "graph": {
+                    "name": "iris-canary",
+                    "implementation": "XGBOOST_SERVER",
+                    "endpoint": {
+                        "type": "REST"
+                    },
+                    "modelUri": "gs://seldon-models/xgboost/iris"
+                },
+                "componentSpecs": [
+                    {
+                        "metadata": {
+                            "creationTimestamp": "2019-11-25T10:34:44Z"
+                        },
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "iris-canary",
+                                    "resources": {}
                                 }
                             ]
                         }
@@ -46,7 +95,7 @@
                 "replicas": 1,
                 "engineResources": {},
                 "svcOrchSpec": {},
-                "traffic": 100,
+                "traffic": 10,
                 "explainer": {
                     "containerSpec": {
                         "name": "",
