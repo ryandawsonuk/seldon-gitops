@@ -50,7 +50,43 @@
                     "version": "default"
                 },
                 "svcOrchSpec": {},
-                "traffic": 100,
+                "traffic": 90,
+                "explainer": {
+                    "containerSpec": {
+                        "name": "",
+                        "resources": {}
+                    }
+                }
+            },
+            {
+                "name": "canary",
+                "graph": {
+                    "name": "iris2-canary",
+                    "implementation": "SKLEARN_SERVER",
+                    "endpoint": {
+                        "type": "REST"
+                    },
+                    "modelUri": "gs://seldon-models/sklearn/iris"
+                },
+                "componentSpecs": [
+                    {
+                        "metadata": {
+                            "creationTimestamp": "2019-12-02T13:38:56Z"
+                        },
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "iris2-canary",
+                                    "resources": {}
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "engineResources": {},
+                "svcOrchSpec": {},
+                "traffic": 10,
                 "explainer": {
                     "containerSpec": {
                         "name": "",
