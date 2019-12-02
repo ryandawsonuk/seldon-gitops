@@ -50,43 +50,7 @@
                     "version": "default"
                 },
                 "svcOrchSpec": {},
-                "traffic": 90,
-                "explainer": {
-                    "containerSpec": {
-                        "name": "",
-                        "resources": {}
-                    }
-                }
-            },
-            {
-                "name": "canary",
-                "graph": {
-                    "name": "loanclassifier-canary",
-                    "implementation": "SKLEARN_SERVER",
-                    "endpoint": {
-                        "type": "REST"
-                    },
-                    "modelUri": "gs://seldon-models/sklearn/income/model"
-                },
-                "componentSpecs": [
-                    {
-                        "metadata": {
-                            "creationTimestamp": "2019-12-02T16:00:04Z"
-                        },
-                        "spec": {
-                            "containers": [
-                                {
-                                    "name": "loanclassifier-canary",
-                                    "resources": {}
-                                }
-                            ]
-                        }
-                    }
-                ],
-                "replicas": 1,
-                "engineResources": {},
-                "svcOrchSpec": {},
-                "traffic": 10,
+                "traffic": 100,
                 "explainer": {
                     "containerSpec": {
                         "name": "",
