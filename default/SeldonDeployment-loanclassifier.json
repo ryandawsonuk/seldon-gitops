@@ -1,31 +1,64 @@
 {
-  "kind": "SeldonDeployment",
-  "apiVersion": "machinelearning.seldon.io/v1alpha2",
-  "metadata": {
-    "name": "loanclassifier"
-  },
-  "spec": {
-    "name": "loanclassifier",
-    "predictors": [
-      {
-        "name": "default",
-        "graph": {
-          "name": "loanclassifier-default",
-          "implementation": "SKLEARN_SERVER",
-          "modelUri": "gs://seldon-models/sklearn/income/model"
-        },
-        "replicas": 1
-      },
-      {
-        "name": "shadow",
-        "graph": {
-          "name": "loanclassifier-shadow",
-          "implementation": "SKLEARN_SERVER",
-          "modelUri": "gs://seldon-models/sklearn/income/model"
-        },
-        "replicas": 1,
-        "shadow": true
-      }
-    ]
-  }
+    "kind": "SeldonDeployment",
+    "apiVersion": "machinelearning.seldon.io/v1alpha2",
+    "metadata": {
+        "name": "loanclassifier",
+        "namespace": "default",
+        "creationTimestamp": null
+    },
+    "spec": {
+        "name": "loanclassifier",
+        "predictors": [
+            {
+                "name": "default",
+                "graph": {
+                    "name": "loanclassifier-default",
+                    "type": "UNKNOWN_TYPE",
+                    "implementation": "SKLEARN_SERVER",
+                    "endpoint": {
+                        "service_host": "localhost",
+                        "service_port": 9000,
+                        "type": "REST"
+                    },
+                    "modelUri": "gs://seldon-models/sklearn/income/model"
+                },
+                "componentSpecs": [
+                    {
+                        "metadata": {
+                            "creationTimestamp": "2019-12-02T15:54:22Z"
+                        },
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "loanclassifier-default",
+                                    "image": "seldonio/sklearnserver_rest:0.2",
+                                    "resources": {},
+                                    "volumeMounts": [
+                                        {
+                                            "name": "podinfo",
+                                            "mountPath": "/etc/podinfo"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "engineResources": {},
+                "labels": {
+                    "version": "default"
+                },
+                "svcOrchSpec": {},
+                "traffic": 100,
+                "explainer": {
+                    "containerSpec": {
+                        "name": "",
+                        "resources": {}
+                    }
+                }
+            }
+        ]
+    },
+    "status": {}
 }
