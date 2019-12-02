@@ -24,7 +24,7 @@
           "modelUri": "gs://seldon-models/sklearn/income/model"
         },
         "replicas": 1,
-        "shadow": "true"
+        "shadow": true
       }
     ]
   }
