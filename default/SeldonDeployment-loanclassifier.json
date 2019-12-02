@@ -15,16 +15,6 @@
           "modelUri": "gs://seldon-models/sklearn/income/model"
         },
         "replicas": 1
-      },
-      {
-        "name": "shadow",
-        "graph": {
-          "name": "loanclassifier-shadow",
-          "implementation": "SKLEARN_SERVER",
-          "modelUri": "gs://seldon-models/sklearn/income/model"
-        },
-        "replicas": 1,
-        "shadow": true
       }
     ]
   }
