@@ -1,0 +1,69 @@
+{
+    "kind": "SeldonDeployment",
+    "apiVersion": "machinelearning.seldon.io/v1alpha2",
+    "metadata": {
+        "name": "fp-model",
+        "namespace": "default",
+        "creationTimestamp": null
+    },
+    "spec": {
+        "name": "fp-model",
+        "predictors": [
+            {
+                "name": "default",
+                "graph": {
+                    "name": "fp-model-default",
+                    "type": "MODEL",
+                    "endpoint": {
+                        "type": "REST"
+                    }
+                },
+                "componentSpecs": [
+                    {
+                        "metadata": {
+                            "creationTimestamp": "2019-12-09T14:02:51Z"
+                        },
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "fp-model-default",
+                                    "image": "seldonio/xgboost-fordml-server_rest:0.1",
+                                    "env": [
+                                        {
+                                            "name": "PREDICTIVE_UNIT_PARAMETERS",
+                                            "value": "[   { \t\"name\": \"model_uri\", \t\"value\": \"gs://floorplanning/xgboost\", \t\"type\": \"STRING\"   } ]"
+                                        }
+                                    ],
+                                    "resources": {
+                                        "limits": {
+                                            "cpu": "1",
+                                            "memory": "1Gi"
+                                        },
+                                        "requests": {
+                                            "cpu": "1",
+                                            "memory": "1Gi"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "engineResources": {},
+                "svcOrchSpec": {},
+                "traffic": 100,
+                "explainer": {
+                    "containerSpec": {
+                        "name": "",
+                        "resources": {}
+                    }
+                }
+            }
+        ],
+        "annotations": {
+            "seldon.io/engine-seldon-log-messages-externally": "true"
+        }
+    },
+    "status": {}
+}
