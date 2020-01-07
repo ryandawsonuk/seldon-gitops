@@ -57,6 +57,45 @@
                         "resources": {}
                     }
                 }
+            },
+            {
+                "name": "shadow",
+                "graph": {
+                    "name": "income-shadow",
+                    "implementation": "SKLEARN_SERVER",
+                    "endpoint": {
+                        "type": "REST"
+                    },
+                    "modelUri": "gs://seldon-models/sklearn/income/explainer"
+                },
+                "componentSpecs": [
+                    {
+                        "metadata": {
+                            "creationTimestamp": "2020-01-07T15:31:50Z"
+                        },
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "income-shadow",
+                                    "resources": {}
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "annotations": {
+                    "seldon.io/canary": "false"
+                },
+                "engineResources": {},
+                "svcOrchSpec": {},
+                "explainer": {
+                    "containerSpec": {
+                        "name": "",
+                        "resources": {}
+                    }
+                },
+                "shadow": true
             }
         ],
         "annotations": {
