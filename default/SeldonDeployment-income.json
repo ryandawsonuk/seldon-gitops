@@ -4,7 +4,10 @@
     "metadata": {
         "name": "income",
         "namespace": "default",
-        "creationTimestamp": null
+        "creationTimestamp": null,
+        "labels": {
+            "app.kubernetes.io/instance": "seldon-gitops-default"
+        }
     },
     "spec": {
         "name": "income",
@@ -52,6 +55,8 @@
                 "svcOrchSpec": {},
                 "traffic": 100,
                 "explainer": {
+                    "type": "AnchorTabular",
+                    "modelUri": "gs://seldon-models/sklearn/income/explainer",
                     "containerSpec": {
                         "name": "",
                         "resources": {}
@@ -62,8 +67,11 @@
                 "name": "shadow",
                 "graph": {
                     "name": "income-shadow",
+                    "type": "UNKNOWN_TYPE",
                     "implementation": "SKLEARN_SERVER",
                     "endpoint": {
+                        "service_host": "localhost",
+                        "service_port": 9001,
                         "type": "REST"
                     },
                     "modelUri": "gs://seldon-models/sklearn/income/model"
@@ -77,7 +85,14 @@
                             "containers": [
                                 {
                                     "name": "income-shadow",
-                                    "resources": {}
+                                    "image": "seldonio/sklearnserver_rest:0.2",
+                                    "resources": {},
+                                    "volumeMounts": [
+                                        {
+                                            "name": "podinfo",
+                                            "mountPath": "/etc/podinfo"
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -88,6 +103,9 @@
                     "seldon.io/canary": "false"
                 },
                 "engineResources": {},
+                "labels": {
+                    "version": "shadow"
+                },
                 "svcOrchSpec": {},
                 "explainer": {
                     "containerSpec": {
