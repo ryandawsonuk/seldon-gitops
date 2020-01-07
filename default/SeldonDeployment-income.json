@@ -13,8 +13,11 @@
                 "name": "default",
                 "graph": {
                     "name": "income-default",
+                    "type": "UNKNOWN_TYPE",
                     "implementation": "SKLEARN_SERVER",
                     "endpoint": {
+                        "service_host": "localhost",
+                        "service_port": 9000,
                         "type": "REST"
                     },
                     "modelUri": "gs://seldon-models/sklearn/income/model"
@@ -28,7 +31,14 @@
                             "containers": [
                                 {
                                     "name": "income-default",
-                                    "resources": {}
+                                    "image": "seldonio/sklearnserver_rest:0.2",
+                                    "resources": {},
+                                    "volumeMounts": [
+                                        {
+                                            "name": "podinfo",
+                                            "mountPath": "/etc/podinfo"
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -36,6 +46,9 @@
                 ],
                 "replicas": 1,
                 "engineResources": {},
+                "labels": {
+                    "version": "default"
+                },
                 "svcOrchSpec": {},
                 "traffic": 100,
                 "explainer": {
@@ -44,6 +57,45 @@
                         "resources": {}
                     }
                 }
+            },
+            {
+                "name": "shadow",
+                "graph": {
+                    "name": "income-shadow",
+                    "implementation": "SKLEARN_SERVER",
+                    "endpoint": {
+                        "type": "REST"
+                    },
+                    "modelUri": "gs://seldon-models/sklearn/income/model"
+                },
+                "componentSpecs": [
+                    {
+                        "metadata": {
+                            "creationTimestamp": "2020-01-07T15:50:18Z"
+                        },
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "income-shadow",
+                                    "resources": {}
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "annotations": {
+                    "seldon.io/canary": "false"
+                },
+                "engineResources": {},
+                "svcOrchSpec": {},
+                "explainer": {
+                    "containerSpec": {
+                        "name": "",
+                        "resources": {}
+                    }
+                },
+                "shadow": true
             }
         ],
         "annotations": {
