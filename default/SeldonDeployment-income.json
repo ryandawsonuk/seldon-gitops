@@ -4,7 +4,10 @@
     "metadata": {
         "name": "income",
         "namespace": "default",
-        "creationTimestamp": null
+        "creationTimestamp": null,
+        "labels": {
+            "app.kubernetes.io/instance": "seldon-gitops-default"
+        }
     },
     "spec": {
         "name": "income",
@@ -52,6 +55,8 @@
                 "svcOrchSpec": {},
                 "traffic": 100,
                 "explainer": {
+                    "type": "AnchorTabular",
+                    "modelUri": "gs://seldon-models/sklearn/income/explainer",
                     "containerSpec": {
                         "name": "",
                         "resources": {}
