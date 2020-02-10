@@ -20,7 +20,7 @@
                     "logger": {
                        "mode": "all",
                        "url": "http://default-broker"
-                     }
+                     },
                     "modelUri": "gs://seldon-models/sklearn/income/model"
                 },
                 "componentSpecs": [
