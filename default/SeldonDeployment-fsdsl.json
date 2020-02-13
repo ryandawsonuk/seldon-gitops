@@ -1,0 +1,58 @@
+{
+    "kind": "SeldonDeployment",
+    "apiVersion": "machinelearning.seldon.io/v1alpha2",
+    "metadata": {
+        "name": "fsdsl",
+        "namespace": "default",
+        "creationTimestamp": null
+    },
+    "spec": {
+        "name": "fsdsl",
+        "predictors": [
+            {
+                "name": "default",
+                "graph": {
+                    "name": "fsdsl-default",
+                    "implementation": "SKLEARN_SERVER",
+                    "endpoint": {
+                        "type": "REST"
+                    },
+                    "modelUri": "gs://seldon-models/sklearn/income/model",
+                    "logger": {
+                        "url": "http://default-broker",
+                        "mode": "all"
+                    }
+                },
+                "componentSpecs": [
+                    {
+                        "metadata": {
+                            "creationTimestamp": "2020-02-13T14:13:09Z"
+                        },
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "fsdsl-default",
+                                    "resources": {}
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "engineResources": {},
+                "svcOrchSpec": {},
+                "traffic": 100,
+                "explainer": {
+                    "containerSpec": {
+                        "name": "",
+                        "resources": {}
+                    }
+                }
+            }
+        ],
+        "annotations": {
+            "seldon.io/engine-seldon-log-messages-externally": "true"
+        }
+    },
+    "status": {}
+}
