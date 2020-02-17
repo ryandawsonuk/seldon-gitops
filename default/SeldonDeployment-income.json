@@ -25,7 +25,7 @@
                     },
                     "modelUri": "gs://seldon-models/sklearn/income/model",
                     "logger": {
-                        "url": "http://default-broker",
+                        "url": "http://seldon-request-logger",
                         "mode": "all"
                     }
                 },
