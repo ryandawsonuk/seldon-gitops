@@ -1,0 +1,58 @@
+{
+    "kind": "SeldonDeployment",
+    "apiVersion": "machinelearning.seldon.io/v1alpha2",
+    "metadata": {
+        "name": "halfplustwo",
+        "namespace": "cifar10",
+        "creationTimestamp": null
+    },
+    "spec": {
+        "name": "halfplustwo",
+        "predictors": [
+            {
+                "name": "default",
+                "graph": {
+                    "name": "halfplustwo-default",
+                    "implementation": "TENSORFLOW_SERVER",
+                    "endpoint": {
+                        "type": "REST"
+                    },
+                    "modelUri": "gs://seldon-models/tfserving/half_plus_two",
+                    "logger": {
+                        "url": "http://default-broker",
+                        "mode": "all"
+                    }
+                },
+                "componentSpecs": [
+                    {
+                        "metadata": {
+                            "creationTimestamp": "2020-03-16T15:50:10Z"
+                        },
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "halfplustwo-default",
+                                    "resources": {}
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "engineResources": {},
+                "svcOrchSpec": {},
+                "traffic": 100,
+                "explainer": {
+                    "containerSpec": {
+                        "name": "",
+                        "resources": {}
+                    }
+                }
+            }
+        ],
+        "annotations": {
+            "seldon.io/engine-seldon-log-messages-externally": "true"
+        }
+    },
+    "status": {}
+}
