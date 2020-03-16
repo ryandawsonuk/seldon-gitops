@@ -11,6 +11,14 @@
         "predictors": [
             {
                 "name": "default",
+                "protocol": "tensorflow",
+                "parameters": [
+                    {
+                        "name": "model_name",
+                        "type": "STRING",
+                        "value": "halfplustwo"
+                    }
+                ],
                 "graph": {
                     "name": "halfplustwo-default",
                     "implementation": "TENSORFLOW_SERVER",
