@@ -1,0 +1,58 @@
+{
+    "kind": "SeldonDeployment",
+    "apiVersion": "machinelearning.seldon.io/v1alpha2",
+    "metadata": {
+        "name": "cifar",
+        "namespace": "cifar10",
+        "creationTimestamp": null
+    },
+    "spec": {
+        "name": "cifar",
+        "predictors": [
+            {
+                "name": "default",
+                "graph": {
+                    "name": "cifar-default",
+                    "implementation": "TENSORFLOW_SERVER",
+                    "endpoint": {
+                        "type": "REST"
+                    },
+                    "modelUri": "gs://seldon-models/alibi-detect/classifier/cifar10/resnet32",
+                    "logger": {
+                        "url": "http://default-broker",
+                        "mode": "all"
+                    }
+                },
+                "componentSpecs": [
+                    {
+                        "metadata": {
+                            "creationTimestamp": "2020-03-16T12:02:54Z"
+                        },
+                        "spec": {
+                            "containers": [
+                                {
+                                    "name": "cifar-default",
+                                    "resources": {}
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "engineResources": {},
+                "svcOrchSpec": {},
+                "traffic": 100,
+                "explainer": {
+                    "containerSpec": {
+                        "name": "",
+                        "resources": {}
+                    }
+                }
+            }
+        ],
+        "annotations": {
+            "seldon.io/engine-seldon-log-messages-externally": "true"
+        }
+    },
+    "status": {}
+}
