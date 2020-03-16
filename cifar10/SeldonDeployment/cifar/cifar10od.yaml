@@ -1,0 +1,37 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: vae-outlier
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "1"
+    spec:
+      containers:
+      - image: seldonio/cifar10od:0.0.4
+        imagePullPolicy: Always
+        args:
+        - --model_name
+        - vaeod
+        - --storage_uri
+        - ./vae_outlier_detector/
+        - --reply_url
+        - http://seldon-request-logger.cifar10
+        - --event_type
+        - io.seldon.serving.inference.outlier
+---
+apiVersion: eventing.knative.dev/v1alpha1
+kind: Trigger
+metadata:
+  name: vaeoutlier-trigger
+  namespace: default
+spec:
+  filter:
+    sourceAndType:
+      type: io.seldon.serving.inference.request
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1alpha1
+      kind: Service
+      name: vae-outlier
