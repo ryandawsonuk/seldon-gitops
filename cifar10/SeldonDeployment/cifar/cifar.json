@@ -1,52 +1,35 @@
 {
-    "kind": "SeldonDeployment",
-    "apiVersion": "machinelearning.seldon.io/v1alpha2",
-    "metadata": {
-        "name": "cifar",
-        "namespace": "cifar10",
-        "creationTimestamp": null
-    },
-    "spec": {
-        "name": "cifar",
-        "predictors": [
+  "apiVersion": "machinelearning.seldon.io/v1alpha2",
+  "kind": "SeldonDeployment",
+  "metadata": {
+    "name": "cifar"
+  },
+  "spec": {
+    "name": "cifar",
+    "predictors": [
+      {
+        "graph": {
+          "children": [],
+          "implementation": "TENSORFLOW_SERVER",
+          "modelUri": "gs://seldon-models/alibi-detect/classifier/cifar10/resnet32",
+          "logger": {
+             "url": "http://default-broker",
+             "mode": "all"
+          }
+          "name": "resnet32",
+          "parameters": [
             {
-                "name": "default",
-                "graph": {
-                    "name": "cifar-default",
-                    "implementation": "TENSORFLOW_SERVER",
-                    "endpoint": {
-                        "type": "REST"
-                    },
-                    "modelUri": "gs://seldon-models/alibi-detect/classifier/cifar10/resnet32",
-                    "logger": {
-                        "url": "http://default-broker",
-                        "mode": "all"
-                    }
-                },
-                "componentSpecs": [
-                    {
-                        "metadata": {
-                            "creationTimestamp": "2020-03-16T12:02:54Z"
-                        },
-                        "spec": {
-                            "containers": [
-                                {
-                                    "name": "cifar-default",
-                                    "resources": {}
-                                }
-                            ]
-                        }
-                    }
-                ],
-                "replicas": 1,
-                "engineResources": {},
-                "svcOrchSpec": {},
-                "traffic": 100
+              "name": "model_name",
+              "type": "STRING",
+              "value": "resnet32"
             }
-        ],
-        "annotations": {
-            "seldon.io/engine-seldon-log-messages-externally": "true"
-        }
-    },
-    "status": {}
+          ]
+        },
+        "name": "default",
+        "replicas": 1,
+        "protocol": "tensorflow",
+        "transport": "rest"
+      }
+    ]
+  }
 }
