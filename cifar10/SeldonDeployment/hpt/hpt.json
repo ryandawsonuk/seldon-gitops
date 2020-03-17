@@ -23,7 +23,7 @@
         },
         "name": "default",
         "replicas": 1,
-        "protocol": "seldon",
+        "protocol": "tensorflow",
         "transport": "rest"
       }
     ]
