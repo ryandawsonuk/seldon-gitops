@@ -6,6 +6,8 @@
   },
   "spec": {
     "name": "hpt",
+    "protocol": "tensorflow",
+    "transport": "rest",
     "predictors": [
       {
         "graph": {
@@ -22,9 +24,7 @@
           ]
         },
         "name": "default",
-        "replicas": 1,
-        "protocol": "tensorflow",
-        "transport": "rest"
+        "replicas": 1
       }
     ]
   }
