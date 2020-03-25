@@ -22,7 +22,10 @@
                             "memory": "1Gi"
                         }
                     }
-                }
+                },
+                "logger": {
+					"mode": "all"
+				}
             }
         }
     },
