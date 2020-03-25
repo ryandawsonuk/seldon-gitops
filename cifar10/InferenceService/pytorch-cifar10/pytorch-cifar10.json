@@ -1,0 +1,30 @@
+{
+    "kind": "InferenceService",
+    "apiVersion": "serving.kubeflow.org/v1alpha2",
+    "metadata": {
+        "name": "pytorch-cifar10",
+        "namespace": "cifar10",
+        "creationTimestamp": null
+    },
+    "spec": {
+        "default": {
+            "predictor": {
+                "pytorch": {
+                    "storageUri": "gs://kfserving-samples/models/pytorch/cifar10/",
+                    "modelClassName": "Net",
+                    "resources": {
+                        "limits": {
+                            "cpu": "1",
+                            "memory": "1Gi"
+                        },
+                        "requests": {
+                            "cpu": "1",
+                            "memory": "1Gi"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "status": {}
+}
