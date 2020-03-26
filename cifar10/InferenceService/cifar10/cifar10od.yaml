@@ -3,10 +3,11 @@ kind: Service
 metadata:
   name: vae-outlier
 spec:
-  template:
-    metadata:
-      annotations:
-        autoscaling.knative.dev/minScale: "1"
+ template:
+  metadata:
+   annotations:
+    autoscaling.knative.dev/minScale: "1"
+    autoscaling.knative.dev/maxScale: "2"
     spec:
       containers:
       - image: seldonio/cifar10od:0.0.4
