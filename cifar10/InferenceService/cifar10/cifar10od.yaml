@@ -20,7 +20,7 @@ spec:
       - --reply_url
       - http://seldon-request-logger.cifar10
       - --event_type
-      - io.seldon.serving.inference.outlier
+      - org.kubeflow.serving.inference.outlier
 ---
 apiVersion: eventing.knative.dev/v1alpha1
 kind: Trigger
