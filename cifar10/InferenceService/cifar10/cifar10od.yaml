@@ -2,6 +2,7 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: vae-outlier
+  namespace: cifar10
 spec:
  template:
   metadata:
@@ -26,7 +27,7 @@ apiVersion: eventing.knative.dev/v1alpha1
 kind: Trigger
 metadata:
   name: vaeoutlier-trigger
-  namespace: default
+  namespace: cifar10
 spec:
   filter:
     sourceAndType:
