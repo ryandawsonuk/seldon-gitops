@@ -8,19 +8,19 @@ spec:
    annotations:
     autoscaling.knative.dev/minScale: "1"
     autoscaling.knative.dev/maxScale: "2"
-    spec:
-      containers:
-      - image: seldonio/cifar10od:0.0.4
-        imagePullPolicy: Always
-        args:
-        - --model_name
-        - vaeod
-        - --storage_uri
-        - ./vae_outlier_detector/
-        - --reply_url
-        - http://seldon-request-logger.cifar10
-        - --event_type
-        - io.seldon.serving.inference.outlier
+  spec:
+    containers:
+    - image: seldonio/cifar10od:0.0.4
+      imagePullPolicy: Always
+      args:
+      - --model_name
+      - vaeod
+      - --storage_uri
+      - ./vae_outlier_detector/
+      - --reply_url
+      - http://seldon-request-logger.cifar10
+      - --event_type
+      - io.seldon.serving.inference.outlier
 ---
 apiVersion: eventing.knative.dev/v1alpha1
 kind: Trigger
