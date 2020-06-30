@@ -56,7 +56,7 @@
         "annotations": {
             "seldon.io/engine-seldon-log-messages-externally": "true"
         },
-        "protocol": "seldon",
+        "protocol": "tensorflow",
         "transport": "rest"
     },
     "status": {}
