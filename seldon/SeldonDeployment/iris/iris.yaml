@@ -1,0 +1,156 @@
+typemeta:
+  kind: SeldonDeployment
+  apiversion: machinelearning.seldon.io/v1alpha2
+objectmeta:
+  name: iris
+  generatename: ""
+  namespace: seldon
+  selflink: ""
+  uid: ""
+  resourceversion: ""
+  generation: 0
+  creationtimestamp: "0001-01-01T00:00:00Z"
+  deletiontimestamp: null
+  deletiongraceperiodseconds: null
+  labels:
+    fluentd: "true"
+  annotations: {}
+  ownerreferences: []
+  finalizers: []
+  clustername: ""
+  managedfields: []
+spec:
+  name: iris
+  predictors:
+  - name: default
+    graph:
+      name: iris-container
+      children: []
+      type: null
+      implementation: SKLEARN_SERVER
+      methods: null
+      endpoint:
+        servicehost: ""
+        serviceport: 0
+        type: REST
+      parameters: []
+      modeluri: gs://seldon-models/sklearn/iris
+      serviceaccountname: ""
+      envsecretrefname: ""
+      logger:
+        url: null
+        mode: all
+    componentspecs:
+    - metadata:
+        name: ""
+        generatename: ""
+        namespace: ""
+        selflink: ""
+        uid: ""
+        resourceversion: ""
+        generation: 0
+        creationtimestamp: "2020-10-13T16:16:21.637Z"
+        deletiontimestamp: null
+        deletiongraceperiodseconds: null
+        labels: {}
+        annotations: {}
+        ownerreferences: []
+        finalizers: []
+        clustername: ""
+        managedfields: []
+      spec:
+        volumes: []
+        initcontainers: []
+        containers:
+        - name: iris-container
+          image: ""
+          command: []
+          args: []
+          workingdir: ""
+          ports: []
+          envfrom: []
+          env: []
+          resources:
+            limits:
+              cpu:
+                format: DecimalSI
+              memory:
+                format: BinarySI
+            requests:
+              cpu:
+                format: DecimalSI
+              memory:
+                format: BinarySI
+          volumemounts: []
+          volumedevices: []
+          livenessprobe: null
+          readinessprobe: null
+          startupprobe: null
+          lifecycle: null
+          terminationmessagepath: ""
+          terminationmessagepolicy: ""
+          imagepullpolicy: ""
+          securitycontext: null
+          stdin: false
+          stdinonce: false
+          tty: false
+        ephemeralcontainers: []
+        restartpolicy: ""
+        terminationgraceperiodseconds: null
+        activedeadlineseconds: null
+        dnspolicy: ""
+        nodeselector: {}
+        serviceaccountname: ""
+        deprecatedserviceaccount: ""
+        automountserviceaccounttoken: null
+        nodename: ""
+        hostnetwork: false
+        hostpid: false
+        hostipc: false
+        shareprocessnamespace: null
+        securitycontext: null
+        imagepullsecrets: []
+        hostname: ""
+        subdomain: ""
+        affinity: null
+        schedulername: ""
+        tolerations: []
+        hostaliases: []
+        priorityclassname: ""
+        priority: null
+        dnsconfig: null
+        readinessgates: []
+        runtimeclassname: null
+        enableservicelinks: null
+        preemptionpolicy: null
+        overhead: {}
+        topologyspreadconstraints: []
+      hpaspec: null
+      replicas: null
+    replicas: 1
+    annotations: {}
+    engineresources:
+      limits: {}
+      requests: {}
+    labels: {}
+    svcorchspec:
+      resources: null
+      env: []
+      replicas: null
+    traffic: 100
+    explainer: null
+    shadow: false
+  oauthkey: ""
+  oauthsecret: ""
+  annotations:
+    seldon.io/engine-seldon-log-messages-externally: "true"
+  protocol: seldon
+  transport: rest
+  replicas: null
+status:
+  state: ""
+  description: ""
+  deploymentstatus: {}
+  servicestatus: {}
+  replicas: 0
+  address: null
