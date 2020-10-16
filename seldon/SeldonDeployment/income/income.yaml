@@ -1,0 +1,36 @@
+apiVersion: machinelearning.seldon.io/v1alpha2
+kind: SeldonDeployment
+metadata:
+  creationTimestamp: null
+  labels:
+    fluentd: "true"
+  name: income
+  namespace: seldon
+spec:
+  annotations:
+    seldon.io/engine-seldon-log-messages-externally: "true"
+  name: income
+  predictors:
+  - componentSpecs:
+    - metadata:
+        creationTimestamp: "2020-10-16T15:57:56Z"
+      spec:
+        containers:
+        - name: income-container
+          resources: {}
+    engineResources: {}
+    graph:
+      endpoint:
+        type: REST
+      implementation: SKLEARN_SERVER
+      logger:
+        mode: all
+      modelUri: gs://seldon-models/sklearn/income/model
+      name: income-container
+    name: default
+    replicas: 1
+    svcOrchSpec: {}
+    traffic: 100
+  protocol: seldon
+  transport: rest
+status: {}
