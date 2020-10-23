@@ -2,24 +2,15 @@ apiVersion: serving.kubeflow.org/v1alpha2
 kind: InferenceService
 metadata:
   creationTimestamp: null
-  labels:
-    fluentd: "true"
   name: iris
   namespace: seldon
 spec:
-  canary:
-    predictor:
-      logger:
-        mode: all
-      xgboost:
-        resources: {}
-        storageUri: gs://kfserving-samples/models/xgboost/iris
-  canaryTrafficPercent: 10
   default:
     predictor:
       logger:
         mode: all
-      sklearn:
+      xgboost:
+        nthread: 1
         resources:
           limits:
             cpu: "1"
@@ -28,5 +19,5 @@ spec:
             cpu: "1"
             memory: 2Gi
         runtimeVersion: v0.3.0
-        storageUri: gs://kfserving-samples/models/sklearn/iris
+        storageUri: gs://kfserving-samples/models/xgboost/iris
 status: {}
