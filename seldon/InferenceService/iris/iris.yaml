@@ -7,11 +7,26 @@ metadata:
   name: iris
   namespace: seldon
 spec:
+  canary:
+    predictor:
+      logger:
+        mode: all
+      xgboost:
+        resources: {}
+        storageUri: gs://kfserving-samples/models/xgboost/iris
+  canaryTrafficPercent: 10
   default:
     predictor:
       logger:
         mode: all
       sklearn:
-        resources: {}
+        resources:
+          limits:
+            cpu: "1"
+            memory: 2Gi
+          requests:
+            cpu: "1"
+            memory: 2Gi
+        runtimeVersion: v0.3.0
         storageUri: gs://kfserving-samples/models/sklearn/iris
 status: {}
