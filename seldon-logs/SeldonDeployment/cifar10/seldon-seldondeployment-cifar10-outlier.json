@@ -1,0 +1,29 @@
+{
+    "kind": "List",
+    "apiVersion": "v1",
+    "metadata": {},
+    "items": [
+        {
+            "kind": "Trigger",
+            "apiVersion": "eventing.knative.dev/v1",
+            "metadata": {
+                "name": "seldon-seldondeployment-cifar10-outlier-trigger",
+                "namespace": "seldon-logs",
+                "creationTimestamp": null
+            },
+            "spec": {
+                "broker": "default",
+                "filter": {
+                    "attributes": {
+                        "inferenceservicename": "cifar10",
+                        "type": "io.seldon.serving.inference.request"
+                    }
+                },
+                "subscriber": {
+                    "uri": "http://seldon-seldondeployment-cifar10-outlier.seldon.svc.cluster.local"
+                }
+            },
+            "status": {}
+        }
+    ]
+}
